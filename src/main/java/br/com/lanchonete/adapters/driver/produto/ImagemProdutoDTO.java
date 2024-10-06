@@ -6,15 +6,15 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @ApplicationScoped
-@Entity
-public class ImagemProduto {
+@Entity(name = "produto_imagem")
+public class ImagemProdutoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
 
     @ManyToOne
     @JoinColumn(name = "produto_UUID")
-    public ProdutoDB produto;
+    public ProdutoDTO produto;
 
     public String nome;
     public String url;

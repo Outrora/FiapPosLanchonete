@@ -8,9 +8,9 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ClienteRepository implements PanacheRepository<ClienteDB> {
+public class ClienteRepository implements PanacheRepository<ClienteDTO> {
 
-    public Optional<ClienteDB> buscarCPF(String CPF) {
+    public Optional<ClienteDTO> buscarCPF(String CPF) {
         return find("CPF", CPF).firstResultOptional();
     }
 
@@ -21,15 +21,15 @@ public class ClienteRepository implements PanacheRepository<ClienteDB> {
     }
 
 
-    private ClienteDB adapterDB(Cliente cliente) {
-        ClienteDB peristencia = new ClienteDB();
+    private ClienteDTO adapterDB(Cliente cliente) {
+        ClienteDTO peristencia = new ClienteDTO();
         peristencia.CPF = cliente.CPF();
         peristencia.email = cliente.email();
         peristencia.nome = cliente.nome();
         return peristencia;
     }
 
-    public Optional<ClienteDB> buscarEmail(String email) {
+    public Optional<ClienteDTO> buscarEmail(String email) {
         return find("email", email).firstResultOptional();
     }
 }

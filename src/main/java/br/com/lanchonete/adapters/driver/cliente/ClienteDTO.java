@@ -1,18 +1,17 @@
 package br.com.lanchonete.adapters.driver.cliente;
 
 
+import br.com.lanchonete.adapters.driver.pedido.PedidoDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 @ApplicationScoped
 @Entity(name = "cliente")
-public class ClienteDB {
+public class ClienteDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,6 +21,9 @@ public class ClienteDB {
     public String email;
     public String CPF;
     public Timestamp inclucao;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PedidoDTO> pedidoDTO;
 
 
 }

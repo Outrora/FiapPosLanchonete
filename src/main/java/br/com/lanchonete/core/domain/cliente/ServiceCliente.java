@@ -1,7 +1,8 @@
 package br.com.lanchonete.core.domain.cliente;
 
 
-import br.com.lanchonete.core.application.Cliente.ClientePersistencia;
+import br.com.lanchonete.core.application.Cliente.ClientePortDriver;
+import br.com.lanchonete.core.domain.base.ServiceBase;
 import br.com.lanchonete.core.domain.cliente.validacoes.ValidacaoCliente;
 import br.com.lanchonete.core.domain.entities.Cliente;
 import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
@@ -10,13 +11,13 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class PersistenciaCliente {
+public class ServiceCliente implements ServiceBase<Cliente> {
 
     @Inject
     Instance<ValidacaoCliente> validadores;
 
     @Inject
-    ClientePersistencia clienteDAO;
+    ClientePortDriver clienteDAO;
 
     public void salvarDados(Cliente dados) {
         for (var validador : validadores) {
