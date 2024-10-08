@@ -1,11 +1,10 @@
 package br.com.lanchonete.core.application.Produto;
 
 
-import br.com.lanchonete.adapters.driver.produto.ProdutoRepository;
+import br.com.lanchonete.adapters.AplicacaoMapper;
 import br.com.lanchonete.core.application.base.BasePortDiver;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoRepository> {
+public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoBanco> {
 
 
     private static final Logger log = LoggerFactory.getLogger(ProdutoPortDriver.class);
@@ -31,24 +30,13 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoRepository>
     public Set<Produto> buscarPorCategoria(Categoria dados) {
         return repository.buscarPorCatergoria(dados)
                 .stream()
-                .map(dto -> {
-                    return new Produto(dto.getNome(),
-                            dto.getDescricao(),
-                            dto.getPreco(),
-                            dto.getCategoria(),
-                            Optional.of(dto.getId())
-
-                    );
-                })
+                .map(AplicacaoMapper.INSTANCE::toProduto)
                 .collect(Collectors.toSet());
     }
 
 
     @Transactional
     public void alterar(Produto dados) {
-        if (dados.id().isEmpty()) {
-            throw new ResultadaoVazioErro("Produto não encontrado");
-        }
         repository.editarProduto(dados);
     }
 
@@ -58,15 +46,6 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoRepository>
     }
 
     public Optional<Produto> buscarId(Long id) {
-        var dto = repository.findByIdOptional(id);
-
-        return dto.map(dto1 -> {
-            return new Produto(
-                    dto1.getNome(),
-                    dto1.getDescricao(),
-                    dto1.getPreco(),
-                    dto1.getCategoria(),
-                    Optional.of(dto1.getId()));
-        });
+        return repository.buscarId(id);
     }
 }

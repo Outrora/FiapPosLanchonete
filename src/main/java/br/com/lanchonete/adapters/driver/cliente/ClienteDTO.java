@@ -19,7 +19,7 @@ public class ClienteDTO {
 
     public String nome;
     public String email;
-    public String CPF;
+    public String cpf;
     public Timestamp inclucao;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

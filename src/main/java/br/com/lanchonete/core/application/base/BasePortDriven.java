@@ -13,8 +13,9 @@ public abstract class BasePortDriven<A extends AdapterBase, S extends ServiceBas
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     public void salvar(A adapter) {
-        LOG.info("Salvando Dados");
+        LOG.info("Iniciando o salvamento de dados");
         service.salvarDados(adapter.adapter());
+        LOG.info("Finalizado o salvamento de dados");
     }
 
 

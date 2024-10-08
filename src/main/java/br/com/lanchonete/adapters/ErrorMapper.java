@@ -1,4 +1,4 @@
-package br.com.lanchonete.adapters.driven;
+package br.com.lanchonete.adapters;
 
 import br.com.lanchonete.core.domain.exception.ErroValidacao;
 import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;

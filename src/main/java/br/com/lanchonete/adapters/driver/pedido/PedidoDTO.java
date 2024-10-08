@@ -7,7 +7,7 @@ import br.com.lanchonete.core.domain.enums.EstadoPedido;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ public class PedidoDTO {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private BigDecimal preco;
-    private Timestamp dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @ManyToMany()
     @JoinTable(
@@ -56,11 +56,11 @@ public class PedidoDTO {
         this.preco = preco;
     }
 
-    public Timestamp getDataCriacao() {
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Timestamp dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

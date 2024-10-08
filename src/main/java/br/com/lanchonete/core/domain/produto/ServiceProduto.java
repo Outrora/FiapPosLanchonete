@@ -30,10 +30,10 @@ public class ServiceProduto implements ServiceBase<Produto> {
     }
 
     public void editarDados(Produto produto) {
-        if (produto.id().isEmpty()) {
+        if (produto.getId().isEmpty()) {
             throw new ResultadaoVazioErro("Produto não encontrado");
         }
-        var produtoSalvo = driver.buscarId(produto.id().get());
+        var produtoSalvo = driver.buscarId(produto.getId().get());
         if (produtoSalvo.isEmpty()) {
             throw new ResultadaoVazioErro("Produto não encontrado");
         }

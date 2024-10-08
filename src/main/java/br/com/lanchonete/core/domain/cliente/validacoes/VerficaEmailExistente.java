@@ -15,7 +15,7 @@ public class VerficaEmailExistente implements ValidacaoCliente {
     @Override
     public void validar(Cliente cliente) throws ErroValidacao {
 
-        var busca = clientePortDriver.pegarEmail(cliente.email());
+        var busca = clientePortDriver.pegarEmail(cliente.getEmail());
         if (busca.isPresent()) {
             throw new ErroValidacao("Email já cadastrado");
         }

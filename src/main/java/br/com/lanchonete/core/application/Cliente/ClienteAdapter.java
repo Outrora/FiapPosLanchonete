@@ -28,7 +28,6 @@ public class ClienteAdapter implements AdapterBase<Cliente> {
 
     @Override
     public Cliente adapter() {
-        var cpfLimpo = cpf.replaceAll("[-.]", "").trim();
-        return new Cliente(nome, email, cpfLimpo);
+        return new Cliente(nome, email, cpf);
     }
 }

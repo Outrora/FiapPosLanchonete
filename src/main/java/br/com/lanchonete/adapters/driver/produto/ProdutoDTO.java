@@ -28,6 +28,14 @@ public class ProdutoDTO {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "produtos")
     private Set<PedidoDTO> pedidos;
 
+
+    public void alteraDados(Produto produto) {
+        categoria = produto.getCategoria();
+        descricao = produto.getDescricao();
+        nome = produto.getNome();
+        preco = produto.getPreco();
+    }
+
     public ProdutoDTO() {
     }
 
@@ -53,16 +61,6 @@ public class ProdutoDTO {
 
     public void setPedidos(Set<PedidoDTO> pedidos) {
         this.pedidos = pedidos;
-    }
-
-    public ProdutoDTO(Produto produto) {
-        this.nome = produto.nome();
-        this.descricao = produto.descricao();
-        this.preco = produto.preco();
-        this.categoria = produto.categoria();
-        if (produto.id().isPresent()) {
-            this.id = produto.id().get();
-        }
     }
 
 

@@ -18,9 +18,9 @@ public class RestCliente extends RestBase<ClienteAdapter, ClientePortDriven> {
 
 
     @GET
-    @Path("{CPF}")
-    public Cliente pegarCPF(@PathParam("CPF") String CPF) {
-        return driven.pegarCPF(CPF);
+    @Path("{cpf}")
+    public Cliente pegarCPF(@PathParam("cpf") String cpf) {
+        return driven.pegarCPF(cpf);
     }
 
 

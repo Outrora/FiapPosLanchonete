@@ -19,4 +19,9 @@ public class ProdutoPortDriven extends BasePortDriven<ProdutoAdapter, ServicePro
         return service.excluir(id);
     }
 
+    public void alterarProduto(Long id, Produto produto) {
+        produto.alteraId(id);
+        service.editarDados(produto);
+    }
+
 }

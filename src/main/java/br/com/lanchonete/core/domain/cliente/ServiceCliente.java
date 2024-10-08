@@ -36,16 +36,6 @@ public class ServiceCliente implements ServiceBase<Cliente> {
         throw new ResultadaoVazioErro("Cliente não encontrado");
 
     }
-
-    public boolean alterarDados(Cliente dados) {
-        for (var validador : validadores) {
-            validador.validar(dados);
-        }
-        return clienteDAO.alterar(dados);
-    }
-
-    public boolean excluirDados(Cliente dados) {
-        return clienteDAO.excluir(dados);
-    }
+    
 
 }

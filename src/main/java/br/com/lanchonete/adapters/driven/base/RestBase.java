@@ -10,10 +10,14 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.info.Info;
+
 
 @SuppressWarnings("rawtypes")
 @Consumes(MediaType.APPLICATION_JSON + ";charsert=utf-8")
 @Produces(MediaType.APPLICATION_JSON + ";charsert=utf-8")
+@OpenAPIDefinition(info = @Info(title = "Exemplo API", version = "1.0.0"))
 public abstract class RestBase<A extends AdapterBase, D extends BasePortDriven> {
 
     @Inject
@@ -51,7 +55,6 @@ public abstract class RestBase<A extends AdapterBase, D extends BasePortDriven> 
     }
 
     protected Response respostaSucesso(String messagem, Integer code) {
-
         ObjectNode exceptionJson = objectMapper.createObjectNode();
         exceptionJson.put("messagem", messagem);
         exceptionJson.put("code", code);

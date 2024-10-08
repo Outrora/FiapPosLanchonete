@@ -15,7 +15,7 @@ public class VerficaCPFExistente implements ValidacaoCliente {
     @Override
     public void validar(Cliente cliente) throws ErroValidacao {
 
-        var busca = clientePortDriver.pegarCPF(cliente.CPF());
+        var busca = clientePortDriver.pegarCPF(cliente.getCpf());
         if (busca.isPresent()) {
             throw new ErroValidacao("Usuario já cadastrado");
         }
