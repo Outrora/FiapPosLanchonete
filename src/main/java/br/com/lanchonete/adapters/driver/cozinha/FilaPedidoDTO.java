@@ -3,21 +3,43 @@ package br.com.lanchonete.adapters.driver.cozinha;
 import br.com.lanchonete.adapters.driver.pedido.PedidoDTO;
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity(name = "fila")
 public class FilaPedidoDTO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "fila")
     private Set<PedidoDTO> listaPedidos;
 
+    private LocalDate dia;
 
-    private Date dia;
+    public Set<PedidoDTO> getListaPedidos() {
+        return listaPedidos;
+    }
+
+    public void setListaPedidos(Set<PedidoDTO> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
 }

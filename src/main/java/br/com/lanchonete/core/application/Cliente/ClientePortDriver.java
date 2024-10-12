@@ -21,6 +21,12 @@ public class ClientePortDriver extends BasePortDiver<Cliente, ClienteBanco> {
         repository.cadastrarCliente(dados);
     }
 
+    @Override
+    public Optional<Cliente> pegarId(Long id) {
+        return repository.buscarID(id);
+    }
+
+
     public Optional<Cliente> pegarCPF(String cpf) {
         return repository.buscarCPF(cpf);
     }

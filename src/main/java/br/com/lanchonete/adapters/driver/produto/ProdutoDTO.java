@@ -1,12 +1,13 @@
 package br.com.lanchonete.adapters.driver.produto;
 
-import br.com.lanchonete.adapters.driver.pedido.PedidoDTO;
+import br.com.lanchonete.adapters.driver.pedido.PedidoProdutoDTO;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @ApplicationScoped
@@ -25,8 +26,8 @@ public class ProdutoDTO {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private Set<ImagemProdutoDTO> listaDeImagens;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "produtos")
-    private Set<PedidoDTO> pedidos;
+    @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<PedidoProdutoDTO> pedidoProdutos;
 
 
     public void alteraDados(Produto produto) {
@@ -34,6 +35,18 @@ public class ProdutoDTO {
         descricao = produto.getDescricao();
         nome = produto.getNome();
         preco = produto.getPreco();
+    }
+
+    public List<PedidoProdutoDTO> getPedidoProdutos() {
+        return pedidoProdutos;
+    }
+
+    public void setPedidoProdutos(List<PedidoProdutoDTO> pedidoProdutos) {
+        this.pedidoProdutos = pedidoProdutos;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public ProdutoDTO() {
@@ -57,10 +70,6 @@ public class ProdutoDTO {
 
     public void setListaDeImagens(Set<ImagemProdutoDTO> listaDeImagens) {
         this.listaDeImagens = listaDeImagens;
-    }
-
-    public void setPedidos(Set<PedidoDTO> pedidos) {
-        this.pedidos = pedidos;
     }
 
 
@@ -88,7 +97,5 @@ public class ProdutoDTO {
         return listaDeImagens;
     }
 
-    public Set<PedidoDTO> getPedidos() {
-        return pedidos;
-    }
+
 }

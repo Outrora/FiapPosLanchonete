@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,6 +26,15 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoBanco> {
     @Override
     public void salvar(Produto dados) {
         repository.cadastrarProduto(dados);
+    }
+
+    @Override
+    public Optional<Produto> pegarId(Long id) {
+        return repository.buscarId(id);
+    }
+
+    public List<Produto> pegarId(Set<Long> id) {
+        return repository.buscarId(id);
     }
 
     public Set<Produto> buscarPorCategoria(Categoria dados) {
@@ -45,7 +55,5 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoBanco> {
         return repository.removerProduto(id);
     }
 
-    public Optional<Produto> buscarId(Long id) {
-        return repository.buscarId(id);
-    }
+
 }

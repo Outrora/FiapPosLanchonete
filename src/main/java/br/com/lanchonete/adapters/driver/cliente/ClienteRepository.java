@@ -14,8 +14,9 @@ public class ClienteRepository implements PanacheRepository<ClienteDTO>, Cliente
 
 
     public void cadastrarCliente(Cliente cliente) {
-        var adaptered = AplicacaoMapper.INSTANCE.toCliente(cliente);
-        adaptered.inclucao = new Timestamp(System.currentTimeMillis());
+        var adaptered = new ClienteDTO();
+        adaptered.alterarCliente(cliente);
+        adaptered.setInclucao(new Timestamp(System.currentTimeMillis()));
         persist(adaptered);
     }
 
@@ -25,5 +26,10 @@ public class ClienteRepository implements PanacheRepository<ClienteDTO>, Cliente
 
     public Optional<Cliente> buscarEmail(String email) {
         return find("email", email).firstResultOptional().map(AplicacaoMapper.INSTANCE::toCliente);
+    }
+
+    @Override
+    public Optional<Cliente> buscarID(Long id) {
+        return findByIdOptional(id).map(AplicacaoMapper.INSTANCE::toCliente);
     }
 }

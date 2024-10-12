@@ -8,6 +8,7 @@ import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
 import java.util.Set;
 
 @ApplicationScoped
@@ -29,11 +30,15 @@ public class ServiceProduto implements ServiceBase<Produto> {
         return driver.excluir(id);
     }
 
+    public List<Produto> pegarPelosId(Set<Long> ids) {
+        return driver.pegarId(ids);
+    }
+
     public void editarDados(Produto produto) {
         if (produto.getId().isEmpty()) {
             throw new ResultadaoVazioErro("Produto não encontrado");
         }
-        var produtoSalvo = driver.buscarId(produto.getId().get());
+        var produtoSalvo = driver.pegarId(produto.getId().get());
         if (produtoSalvo.isEmpty()) {
             throw new ResultadaoVazioErro("Produto não encontrado");
         }

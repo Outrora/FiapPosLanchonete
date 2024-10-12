@@ -10,6 +10,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
+import java.util.Optional;
+
 @ApplicationScoped
 public class ServiceCliente implements ServiceBase<Cliente> {
 
@@ -17,25 +19,29 @@ public class ServiceCliente implements ServiceBase<Cliente> {
     Instance<ValidacaoCliente> validadores;
 
     @Inject
-    ClientePortDriver clienteDAO;
+    ClientePortDriver driver;
 
     public void salvarDados(Cliente dados) {
         for (var validador : validadores) {
             validador.validar(dados);
         }
 
-        clienteDAO.salvar(dados);
+        driver.salvar(dados);
+    }
+
+    public Optional<Cliente> pegarID(Long id) {
+        return driver.pegarId(id);
     }
 
     public Cliente pegarCPF(String cpf) {
 
-        var cliente = clienteDAO.pegarCPF(cpf);
+        var cliente = driver.pegarCPF(cpf);
         if (cliente.isPresent()) {
             return cliente.get();
         }
         throw new ResultadaoVazioErro("Cliente não encontrado");
 
     }
-    
+
 
 }

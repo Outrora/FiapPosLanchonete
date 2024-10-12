@@ -2,13 +2,12 @@ package br.com.lanchonete.adapters.driver.pedido;
 
 import br.com.lanchonete.adapters.driver.cliente.ClienteDTO;
 import br.com.lanchonete.adapters.driver.cozinha.FilaPedidoDTO;
-import br.com.lanchonete.adapters.driver.produto.ProdutoDTO;
 import br.com.lanchonete.core.domain.enums.EstadoPedido;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "pedido")
@@ -18,16 +17,13 @@ public class PedidoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+
     private BigDecimal preco;
     private LocalDateTime dataCriacao;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "pedido_produto",
-            joinColumns = @JoinColumn(name = "pedido_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id")
-    )
-    private Set<ProdutoDTO> produtos;
+    @OneToMany(mappedBy = "pedido")
+    private List<PedidoProdutoDTO> pedidoProdutos;
 
 
     @ManyToOne
@@ -64,14 +60,13 @@ public class PedidoDTO {
         this.dataCriacao = dataCriacao;
     }
 
-    public Set<ProdutoDTO> getProdutos() {
-        return produtos;
+    public List<PedidoProdutoDTO> getPedidoProdutos() {
+        return pedidoProdutos;
     }
 
-    public void setProdutos(Set<ProdutoDTO> produtos) {
-        this.produtos = produtos;
+    public void setPedidoProdutos(List<PedidoProdutoDTO> pedidoProdutos) {
+        this.pedidoProdutos = pedidoProdutos;
     }
-
 
     public EstadoPedido getEstadoPedido() {
         return estadoPedido;

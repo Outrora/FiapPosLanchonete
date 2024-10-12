@@ -6,6 +6,7 @@ import br.com.lanchonete.core.domain.enums.Categoria;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ProdutoBanco {
 
@@ -18,4 +19,6 @@ public interface ProdutoBanco {
     boolean removerProduto(Long id);
 
     Optional<Produto> buscarId(Long id);
+
+    List<Produto> buscarId(Set<Long> id);
 }

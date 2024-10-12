@@ -3,6 +3,7 @@ package br.com.lanchonete.core.application.base;
 
 import jakarta.inject.Inject;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public abstract class BasePortDiver<T, R> {
@@ -15,5 +16,6 @@ public abstract class BasePortDiver<T, R> {
 
     public abstract void salvar(T dados);
 
+    public abstract Optional<T> pegarId(Long id);
 
 }

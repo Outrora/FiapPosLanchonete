@@ -11,4 +11,6 @@ public interface ClienteBanco {
     Optional<Cliente> buscarCPF(String cpf);
 
     Optional<Cliente> buscarEmail(String email);
+
+    Optional<Cliente> buscarID(Long id);
 }
