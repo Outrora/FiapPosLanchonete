@@ -16,5 +16,9 @@ public class FilaPedidoService {
         return driver.criarFilaOuPegarAtual();
     }
 
+    public FilaPedidos pegarFilaComPedidos() {
+        return driver.pegarFilaComPedidos();
+    }
+
 
 }

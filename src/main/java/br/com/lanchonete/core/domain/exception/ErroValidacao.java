@@ -1,8 +1,13 @@
 package br.com.lanchonete.core.domain.exception;
 
-public class ErroValidacao extends RuntimeException {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-    public ErroValidacao(String erro){
+public class ErroValidacao extends RuntimeException {
+    private static final Logger log = LoggerFactory.getLogger(ErroValidacao.class);
+
+    public ErroValidacao(String erro) {
         super(erro);
+        log.error("Erro de Validacao:{}", erro);
     }
 }

@@ -23,11 +23,13 @@ public class ClientePortDriver extends BasePortDiver<Cliente, ClienteBanco> {
 
     @Override
     public Optional<Cliente> pegarId(Long id) {
+        log.info("Buscando Cliente pelo ID");
         return repository.buscarID(id);
     }
 
 
     public Optional<Cliente> pegarCPF(String cpf) {
+        log.info("Buscando Cliente pelo CPF");
         return repository.buscarCPF(cpf);
     }
 

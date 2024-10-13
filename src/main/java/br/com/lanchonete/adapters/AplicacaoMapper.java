@@ -1,11 +1,9 @@
 package br.com.lanchonete.adapters;
 
 import br.com.lanchonete.adapters.driver.cliente.ClienteDTO;
-import br.com.lanchonete.adapters.driver.cozinha.FilaPedidoDTO;
 import br.com.lanchonete.adapters.driver.produto.ProdutoDTO;
 import br.com.lanchonete.core.application.Produto.ProdutoAdapter;
 import br.com.lanchonete.core.domain.entities.Cliente;
-import br.com.lanchonete.core.domain.entities.FilaPedidos;
 import br.com.lanchonete.core.domain.entities.Produto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -27,6 +25,6 @@ public interface AplicacaoMapper {
 
     Produto toProduto(ProdutoAdapter source);
 
-    FilaPedidos toFila(FilaPedidoDTO source);
+
 }
 

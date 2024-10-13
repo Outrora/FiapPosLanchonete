@@ -2,6 +2,7 @@ package br.com.lanchonete.adapters.driver.pedido;
 
 import br.com.lanchonete.core.application.Pedido.PedidoBanco;
 import br.com.lanchonete.core.application.Pedido.PedidoRequest;
+import br.com.lanchonete.core.domain.entities.Cliente;
 import br.com.lanchonete.core.domain.entities.Pedido;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,6 +22,11 @@ public class pedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
     @Override
     @Transactional
     public UUID inserirPedido(Pedido pedido, Long filaId, List<PedidoRequest.produtoQuantidade> produtos) {
+
+        Long idCliente = pedido.getCliente()
+                .flatMap(Cliente::getId)
+                .orElse(null);
+
         var id = (UUID) em.createNativeQuery("""
                         INSERT INTO pedido
                         (estadopedido, preco, datacriacao, fila_id, cliente_id,id)
@@ -31,7 +37,7 @@ public class pedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
                 .setParameter("preco", pedido.getValorTotal())
                 .setParameter("datacriacao", pedido.getDataCriacao())
                 .setParameter("fila", filaId)
-                .setParameter("cliente", pedido.getCliente().getId().get())
+                .setParameter("cliente", idCliente)
                 .setParameter("id", UUID.randomUUID())
                 .getSingleResult();
 

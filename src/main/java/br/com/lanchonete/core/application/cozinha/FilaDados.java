@@ -6,5 +6,7 @@ public interface FilaDados {
 
     FilaPedidos criarOuPegarFilaHoje();
 
+    FilaPedidos pegarFilaComPedidos();
+
 
 }

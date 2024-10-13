@@ -27,7 +27,7 @@ public class PedidoDTO {
 
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = true)
     private ClienteDTO cliente;
 
     @ManyToOne()

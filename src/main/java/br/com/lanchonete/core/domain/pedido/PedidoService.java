@@ -45,9 +45,6 @@ public class PedidoService {
         }
 
         var cliente = clienteService.pegarID(request.getId_cliente());
-        if (cliente.isEmpty()) {
-            throw new ErroValidacao("Cliente Invalido");
-        }
 
         var idsProdutos = request.getProdutos()
                 .stream()
@@ -68,7 +65,7 @@ public class PedidoService {
                 })
                 .toList();
 
-        var pedidos = Pedido.ofNovo(cliente.get(), lista);
+        var pedidos = Pedido.ofNovo(cliente, lista);
         pedidos.calcularValorTotal();
 
         var filaAtual = filaPedidoService.criarFilaouPegarAtual();

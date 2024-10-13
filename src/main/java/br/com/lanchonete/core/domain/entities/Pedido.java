@@ -6,16 +6,17 @@ import org.antlr.v4.runtime.misc.Pair;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public class Pedido {
     private LocalDateTime dataCriacao;
-    private Cliente cliente;
+    private Optional<Cliente> cliente;
     private List<Pair<Integer, Produto>> produtos;
     private EstadoPedido estadoPedido;
     private BigDecimal valorTotal;
 
 
-    public Pedido(LocalDateTime dataCriacao, Cliente cliente, List<Pair<Integer, Produto>> produtos, EstadoPedido estadoPedido, BigDecimal valorTotal) {
+    public Pedido(LocalDateTime dataCriacao, Optional<Cliente> cliente, List<Pair<Integer, Produto>> produtos, EstadoPedido estadoPedido, BigDecimal valorTotal) {
         this.dataCriacao = dataCriacao;
         this.cliente = cliente;
         this.produtos = produtos;
@@ -27,16 +28,12 @@ public class Pedido {
         return produtos;
     }
 
-    public void setProdutos(List<Pair<Integer, Produto>> produtos) {
-        this.produtos = produtos;
+    public Optional<Cliente> getCliente() {
+        return cliente;
     }
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
     }
 
 
@@ -56,7 +53,7 @@ public class Pedido {
         }
     }
 
-    public static Pedido ofNovo(Cliente cliente, List<Pair<Integer, Produto>> produtos) {
+    public static Pedido ofNovo(Optional<Cliente> cliente, List<Pair<Integer, Produto>> produtos) {
         return new Pedido(
                 LocalDateTime.now(),
                 cliente,

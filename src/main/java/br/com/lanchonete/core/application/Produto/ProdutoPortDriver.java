@@ -30,14 +30,17 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoBanco> {
 
     @Override
     public Optional<Produto> pegarId(Long id) {
+        log.info("Pegando Produdo pelo ID");
         return repository.buscarId(id);
     }
 
     public List<Produto> pegarId(Set<Long> id) {
+        log.info("Pegando Produtos pelo IDs");
         return repository.buscarId(id);
     }
 
     public Set<Produto> buscarPorCategoria(Categoria dados) {
+        log.info("Pegando Produdo pelo Cetegoria");
         return repository.buscarPorCatergoria(dados)
                 .stream()
                 .map(AplicacaoMapper.INSTANCE::toProduto)
@@ -47,11 +50,13 @@ public class ProdutoPortDriver extends BasePortDiver<Produto, ProdutoBanco> {
 
     @Transactional
     public void alterar(Produto dados) {
+        log.info("Alterando produtos");
         repository.editarProduto(dados);
     }
 
     @Transactional
     public boolean excluir(Long id) {
+        log.info("Excluindo Produto");
         return repository.removerProduto(id);
     }
 

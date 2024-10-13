@@ -1,10 +1,12 @@
 package br.com.lanchonete.adapters.driven.cozinha;
 
 
+import br.com.lanchonete.core.application.cozinha.FilaProdutoDriven;
 import br.com.lanchonete.core.domain.entities.FilaPedidos;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -17,8 +19,11 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Tag(name = "cozinha", description = "Endpoints do cozinha")
 public class RestCozinha {
 
-    @POST
-    public void pegarCPF(FilaPedidos filaPedidos) {
+    @Inject
+    FilaProdutoDriven driven;
 
+    @GET
+    public FilaPedidos pegarFilaComPedidos() {
+        return driven.pegarFilaComPedidos();
     }
 }
