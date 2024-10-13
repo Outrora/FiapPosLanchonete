@@ -85,8 +85,8 @@ FROM maven:3.9.9-sapmachine-21 as builder
 WORKDIR /app
 
 # Copy Maven files
-COPY ../pom.xml .
-COPY ../src ./src
+COPY pom.xml .
+COPY ./src ./src
 
 # Build the application
 RUN mvn package -DskipTests
