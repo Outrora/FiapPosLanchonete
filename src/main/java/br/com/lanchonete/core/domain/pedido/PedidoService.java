@@ -9,8 +9,8 @@ import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.exception.ErroValidacao;
 import br.com.lanchonete.core.domain.pedido.Validadores.ValidarPedido;
 import br.com.lanchonete.core.domain.produto.ServiceProduto;
+import io.quarkus.arc.All;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import org.antlr.v4.runtime.misc.Pair;
 
@@ -23,7 +23,8 @@ import java.util.stream.Collectors;
 public class PedidoService {
 
     @Inject
-    Instance<ValidarPedido> validadores;
+    @All
+    List<ValidarPedido> validadores;
 
     @Inject
     ServiceProduto serviceProduto;
@@ -76,7 +77,7 @@ public class PedidoService {
     }
 
 
-    private void verificarIds(Set<Long> idsProdutos, List<Produto> produtosEncontrados) {
+    public void verificarIds(Set<Long> idsProdutos, List<Produto> produtosEncontrados) {
         if (idsProdutos.size() != produtosEncontrados.size()) {
             var produtosEncontradosIds = produtosEncontrados
                     .stream()
