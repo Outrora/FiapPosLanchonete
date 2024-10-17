@@ -70,7 +70,7 @@ public abstract class RestBase<A extends AdapterBase, D extends BasePortDriven> 
         exceptionJson.put("messagem", "Não foi possível atender à solicitação");
         exceptionJson.put("code", 400);
 
-        return Response.status(201)
+        return Response.status(400)
                 .entity(exceptionJson)
                 .build();
     }

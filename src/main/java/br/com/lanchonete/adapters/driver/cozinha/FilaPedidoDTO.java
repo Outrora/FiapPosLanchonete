@@ -4,7 +4,7 @@ import br.com.lanchonete.adapters.driver.pedido.PedidoDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "fila")
 public class FilaPedidoDTO {
@@ -15,15 +15,15 @@ public class FilaPedidoDTO {
 
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "fila")
-    private Set<PedidoDTO> listaPedidos;
+    private List<PedidoDTO> listaPedidos;
 
     private LocalDate dia;
 
-    public Set<PedidoDTO> getListaPedidos() {
+    public List<PedidoDTO> getListaPedidos() {
         return listaPedidos;
     }
 
-    public void setListaPedidos(Set<PedidoDTO> listaPedidos) {
+    public void setListaPedidos(List<PedidoDTO> listaPedidos) {
         this.listaPedidos = listaPedidos;
     }
 

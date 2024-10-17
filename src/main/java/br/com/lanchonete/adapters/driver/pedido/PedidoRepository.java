@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
-public class pedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBanco {
+public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBanco {
 
     @PersistenceContext
     EntityManager em;

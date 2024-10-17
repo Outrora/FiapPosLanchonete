@@ -23,6 +23,12 @@ public class ProdutoRepository implements PanacheRepository<ProdutoDTO>, Produto
         return find("categoria", categoria).list();
     }
 
+    //Somente para Teste
+    public void resetSequence() {
+        getEntityManager().createNativeQuery("ALTER SEQUENCE produto_id_seq RESTART WITH 1").executeUpdate();
+    }
+
+
     public void cadastrarProduto(Produto produto) {
         var adaptered = new ProdutoDTO();
         adaptered.alteraDados(produto);

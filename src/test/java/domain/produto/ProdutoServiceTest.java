@@ -3,7 +3,7 @@ package domain.produto;
 import br.com.lanchonete.core.application.Produto.ProdutoPortDriver;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
+import br.com.lanchonete.core.domain.exception.ResultadoVazioErro;
 import br.com.lanchonete.core.domain.produto.ServiceProduto;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.component.QuarkusComponentTest;
@@ -99,7 +99,7 @@ public class ProdutoServiceTest {
         when(driver.pegarId(produto.getId().get())).thenReturn(Optional.empty());
 
         // Verifique se a exceção é lançada
-        assertThrows(ResultadaoVazioErro.class, () -> serviceProduto.editarDados(produto));
+        assertThrows(ResultadoVazioErro.class, () -> serviceProduto.editarDados(produto));
     }
 
     @Test
@@ -107,6 +107,6 @@ public class ProdutoServiceTest {
         Produto produto = new Produto("teste", "teste", BigDecimal.valueOf(1), Categoria.lanche, Optional.empty());
 
         // Verifique se a exceção é lançada
-        assertThrows(ResultadaoVazioErro.class, () -> serviceProduto.editarDados(produto));
+        assertThrows(ResultadoVazioErro.class, () -> serviceProduto.editarDados(produto));
     }
 }

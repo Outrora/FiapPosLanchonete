@@ -4,7 +4,7 @@ import br.com.lanchonete.core.application.Produto.ProdutoPortDriver;
 import br.com.lanchonete.core.domain.base.ServiceBase;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
+import br.com.lanchonete.core.domain.exception.ResultadoVazioErro;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -36,11 +36,11 @@ public class ServiceProduto implements ServiceBase<Produto> {
 
     public void editarDados(Produto produto) {
         if (produto.getId().isEmpty()) {
-            throw new ResultadaoVazioErro("Produto não encontrado");
+            throw new ResultadoVazioErro("Produto não encontrado");
         }
         var produtoSalvo = driver.pegarId(produto.getId().get());
         if (produtoSalvo.isEmpty()) {
-            throw new ResultadaoVazioErro("Produto não encontrado");
+            throw new ResultadoVazioErro("Produto não encontrado");
         }
         driver.alterar(produto);
 

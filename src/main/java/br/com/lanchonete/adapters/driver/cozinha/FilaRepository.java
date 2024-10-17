@@ -9,11 +9,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.antlr.v4.runtime.misc.Pair;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 @ApplicationScoped
-public class FilaRepositoy implements PanacheRepository<FilaPedidoDTO>, FilaDados {
+public class FilaRepository implements PanacheRepository<FilaPedidoDTO>, FilaDados {
 
     @Override
     public FilaPedidos criarOuPegarFilaHoje() {
@@ -33,10 +34,11 @@ public class FilaRepositoy implements PanacheRepository<FilaPedidoDTO>, FilaDado
         var filaExite = find("dia", LocalDate.now()).firstResultOptional();
         if (filaExite.isEmpty()) return criarOuPegarFilaHoje();
 
-        var lista = filaExite
-                .get()
-                .getListaPedidos()
-                .stream()
+        var lista = filaExite.get().getListaPedidos();
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+        var lista_retorno = lista.stream()
                 .map(pedidoDTO -> {
                     var produtos = pedidoDTO
                             .getPedidoProdutos()
@@ -47,7 +49,7 @@ public class FilaRepositoy implements PanacheRepository<FilaPedidoDTO>, FilaDado
                     return new Pedido(pedidoDTO.getDataCriacao(), Optional.of(cliente), produtos, pedidoDTO.getEstadoPedido(), pedidoDTO.getPreco());
                 })
                 .toList();
-        return new FilaPedidos(lista, filaExite.get().getDia(), filaExite.get().getId());
+        return new FilaPedidos(lista_retorno, filaExite.get().getDia(), filaExite.get().getId());
     }
 
 

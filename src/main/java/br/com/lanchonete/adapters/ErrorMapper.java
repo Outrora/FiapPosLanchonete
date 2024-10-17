@@ -1,7 +1,7 @@
 package br.com.lanchonete.adapters;
 
 import br.com.lanchonete.core.domain.exception.ErroValidacao;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
+import br.com.lanchonete.core.domain.exception.ResultadoVazioErro;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
@@ -20,7 +20,7 @@ public class ErrorMapper implements ExceptionMapper<Exception> {
 
 
         int code = 500;
-        if (exception instanceof ResultadaoVazioErro) {
+        if (exception instanceof ResultadoVazioErro) {
             code = 404;
         }
 

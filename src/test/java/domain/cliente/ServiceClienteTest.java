@@ -4,7 +4,7 @@ import br.com.lanchonete.core.application.Cliente.ClientePortDriver;
 import br.com.lanchonete.core.domain.cliente.ServiceCliente;
 import br.com.lanchonete.core.domain.cliente.validacoes.ValidacaoCliente;
 import br.com.lanchonete.core.domain.entities.Cliente;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
+import br.com.lanchonete.core.domain.exception.ResultadoVazioErro;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.component.QuarkusComponentTest;
 import jakarta.inject.Inject;
@@ -78,7 +78,7 @@ public class ServiceClienteTest {
         String cpf = "12345678900";
         when(driver.pegarCPF(cpf)).thenReturn(Optional.empty());
 
-        Exception exception = Assertions.assertThrows(ResultadaoVazioErro.class, () -> {
+        Exception exception = Assertions.assertThrows(ResultadoVazioErro.class, () -> {
             serviceCliente.pegarCPF(cpf);
         });
 

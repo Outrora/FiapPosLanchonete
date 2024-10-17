@@ -5,7 +5,7 @@ import br.com.lanchonete.core.application.Cliente.ClientePortDriver;
 import br.com.lanchonete.core.domain.base.ServiceBase;
 import br.com.lanchonete.core.domain.cliente.validacoes.ValidacaoCliente;
 import br.com.lanchonete.core.domain.entities.Cliente;
-import br.com.lanchonete.core.domain.exception.ResultadaoVazioErro;
+import br.com.lanchonete.core.domain.exception.ResultadoVazioErro;
 import io.quarkus.arc.All;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -41,7 +41,7 @@ public class ServiceCliente implements ServiceBase<Cliente> {
         if (cliente.isPresent()) {
             return cliente.get();
         }
-        throw new ResultadaoVazioErro("Cliente não encontrado");
+        throw new ResultadoVazioErro("Cliente não encontrado");
 
     }
 

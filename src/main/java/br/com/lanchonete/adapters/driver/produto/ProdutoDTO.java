@@ -68,10 +68,6 @@ public class ProdutoDTO {
         this.categoria = categoria;
     }
 
-    public void setListaDeImagens(Set<ImagemProdutoDTO> listaDeImagens) {
-        this.listaDeImagens = listaDeImagens;
-    }
-
 
     public Long getId() {
         return id;
@@ -91,10 +87,6 @@ public class ProdutoDTO {
 
     public Categoria getCategoria() {
         return categoria;
-    }
-
-    public Set<ImagemProdutoDTO> getListaDeImagens() {
-        return listaDeImagens;
     }
 
 
