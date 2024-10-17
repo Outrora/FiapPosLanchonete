@@ -22,7 +22,7 @@ public class PedidoDTO {
     private BigDecimal preco;
     private LocalDateTime dataCriacao;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
     private List<PedidoProdutoDTO> pedidoProdutos;
 
 

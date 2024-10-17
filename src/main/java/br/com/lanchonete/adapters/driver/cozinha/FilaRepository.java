@@ -6,6 +6,7 @@ import br.com.lanchonete.core.domain.entities.FilaPedidos;
 import br.com.lanchonete.core.domain.entities.Pedido;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import org.antlr.v4.runtime.misc.Pair;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class FilaRepository implements PanacheRepository<FilaPedidoDTO>, FilaDados {
 
     @Override
+    @Transactional
     public FilaPedidos criarOuPegarFilaHoje() {
         var filaExite = find("dia", LocalDate.now()).firstResultOptional();
 
@@ -30,14 +32,13 @@ public class FilaRepository implements PanacheRepository<FilaPedidoDTO>, FilaDad
         });
     }
 
+    @Transactional
     public FilaPedidos pegarFilaComPedidos() {
         var filaExite = find("dia", LocalDate.now()).firstResultOptional();
         if (filaExite.isEmpty()) return criarOuPegarFilaHoje();
 
-        var lista = filaExite.get().getListaPedidos();
-        if (lista == null) {
-            lista = new ArrayList<>();
-        }
+        var fila = filaExite.orElseThrow();
+        var lista = Optional.ofNullable(fila.getListaPedidos()).orElseGet(ArrayList::new);
         var lista_retorno = lista.stream()
                 .map(pedidoDTO -> {
                     var produtos = pedidoDTO
@@ -45,11 +46,12 @@ public class FilaRepository implements PanacheRepository<FilaPedidoDTO>, FilaDad
                             .stream()
                             .map(pedidoProduto -> new Pair<>(pedidoProduto.getQuantidade(), AplicacaoMapper.INSTANCE.toProduto(pedidoProduto.getProduto())))
                             .toList();
-                    var cliente = AplicacaoMapper.INSTANCE.toCliente(pedidoDTO.getCliente());
-                    return new Pedido(pedidoDTO.getDataCriacao(), Optional.of(cliente), produtos, pedidoDTO.getEstadoPedido(), pedidoDTO.getPreco());
+                    var cliente = Optional.ofNullable(AplicacaoMapper.INSTANCE.toCliente(pedidoDTO.getCliente()));
+                    return new Pedido(pedidoDTO.getDataCriacao(), cliente, produtos, pedidoDTO.getEstadoPedido(), pedidoDTO.getPreco());
                 })
                 .toList();
-        return new FilaPedidos(lista_retorno, filaExite.get().getDia(), filaExite.get().getId());
+
+        return new FilaPedidos(lista_retorno, fila.getDia(), fila.getId());
     }
 
 

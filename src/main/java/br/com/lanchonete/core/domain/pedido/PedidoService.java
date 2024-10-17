@@ -10,7 +10,7 @@ import br.com.lanchonete.core.domain.exception.ErroValidacao;
 import br.com.lanchonete.core.domain.pedido.Validadores.ValidarPedido;
 import br.com.lanchonete.core.domain.produto.ServiceProduto;
 import io.quarkus.arc.All;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import org.antlr.v4.runtime.misc.Pair;
 
@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
+@RequestScoped
 public class PedidoService {
 
     @Inject
@@ -81,7 +81,7 @@ public class PedidoService {
         if (idsProdutos.size() != produtosEncontrados.size()) {
             var produtosEncontradosIds = produtosEncontrados
                     .stream()
-                    .map(produto -> produto.getId().get())
+                    .map(produto -> produto.getId().orElseThrow())
                     .collect(Collectors.toSet());
 
             var produtosNaoEncontrados = idsProdutos.stream()

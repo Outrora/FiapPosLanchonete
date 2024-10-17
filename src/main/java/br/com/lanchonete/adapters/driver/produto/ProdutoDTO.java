@@ -3,14 +3,12 @@ package br.com.lanchonete.adapters.driver.produto;
 import br.com.lanchonete.adapters.driver.pedido.PedidoProdutoDTO;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
-@ApplicationScoped
 @Entity(name = "Produto")
 public class ProdutoDTO {
 

@@ -8,7 +8,7 @@ chmod +x ./mvnw
 if [ "$1" = "-d" ]; then
     echo "Modo de depuração ativado."
     docker-compose -f ./composer/banco-compose.yml up --build -d
-    ./mvnw quarkus:dev
+    ./mvnw quarkus:dev -DskipTests
     exit 0
 fi
 

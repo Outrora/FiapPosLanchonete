@@ -14,7 +14,7 @@ public class FilaPedidoDTO {
     private Long id;
 
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "fila")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "fila")
     private List<PedidoDTO> listaPedidos;
 
     private LocalDate dia;

@@ -6,6 +6,7 @@ import br.com.lanchonete.core.application.Produto.ProdutoAdapter;
 import br.com.lanchonete.core.application.Produto.ProdutoPortDriven;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -13,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.Set;
 
 @Path("produto")
+@RequestScoped
 @Tag(name = "Produto", description = "Endpoints do produto")
 public class RestProduto extends RestBase<ProdutoAdapter, ProdutoPortDriven> {
 

@@ -12,8 +12,7 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class ClientePortDriver extends BasePortDiver<Cliente, ClienteBanco> {
-
-
+    
     private static final Logger log = LoggerFactory.getLogger(ClientePortDriver.class);
 
     @Transactional

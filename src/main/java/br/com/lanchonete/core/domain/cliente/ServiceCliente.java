@@ -24,6 +24,7 @@ public class ServiceCliente implements ServiceBase<Cliente> {
     ClientePortDriver driver;
 
     public void salvarDados(Cliente dados) {
+
         for (var validador : validadores) {
             validador.validar(dados);
         }

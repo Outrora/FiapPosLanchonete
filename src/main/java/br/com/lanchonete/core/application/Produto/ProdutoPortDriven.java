@@ -4,11 +4,11 @@ import br.com.lanchonete.core.application.base.BasePortDriven;
 import br.com.lanchonete.core.domain.entities.Produto;
 import br.com.lanchonete.core.domain.enums.Categoria;
 import br.com.lanchonete.core.domain.produto.ServiceProduto;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 import java.util.Set;
 
-@ApplicationScoped
+@RequestScoped
 public class ProdutoPortDriven extends BasePortDriven<ProdutoAdapter, ServiceProduto> {
 
     public Set<Produto> pegarCategoria(Categoria categoria) {
