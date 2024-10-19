@@ -1,64 +1,46 @@
-# code-with-quarkus
+# Lanchonete PosFiap
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+![JAVA](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Banco](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Quarkus](https://img.shields.io/badge/QUARKUS-009CAB?style=for-the-badge&logo=quarkus&logoColor=white)
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Este projeto usa Quarkus, o Supersonic Subatomic Java Framework.
 
-## Running the application in dev mode
+Se você quiser saber mais sobre o Quarkus, visite seu site: <https://quarkus.io/>
 
-You can run your application in dev mode that enables live coding using:
+## Rodando a Aplicação
 
-```shell script
-./mvnw compile quarkus:dev
+Crie um .env com as seguintes informações:
+
+```
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_URL=
+DB_KIND=postgresql
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
-
-The application can be packaged using:
+Para roda a aplicação localmente:
 
 ```shell script
-./mvnw package
+chmod +x ./run.sh -d
+./run.sh
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
+Para rodar a aplicação dentro de um container
 
 ```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+chmod +x ./run.sh 
+./run.sh
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+> **_NOTE:_**  O Quarkus agora vem com uma Dev UI, que está disponível no modo dev apenas
+> em <http://localhost:8080/q/dev/>.
 
-## Creating a native executable
+## Swagger
 
-You can create a native executable using:
+Para acessar a documentação do REST acessar <http://localhost:8080/swagger-ui/>
 
-```shell script
-./mvnw package -Dnative
-```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
-
-# FiapPosLanchonete
