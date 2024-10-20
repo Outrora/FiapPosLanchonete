@@ -12,14 +12,14 @@ public class ValidadeCPF implements ValidacaoCliente {
     @Override
     public void validar(Cliente cliente) throws ErroValidacao {
 
-        if (!isCPF(cliente.CPF().toString())) {
-            throw new ErroValidacao("CPF Invalido");
+        if (!isCPF(cliente.getCpf().toString())) {
+            throw new ErroValidacao("cpf Invalido");
         }
     }
 
 
     private boolean isCPF(String CPF) {
-        // considera-se erro CPF"s formados por uma sequencia de numeros iguais
+        // considera-se erro cpf"s formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
                 CPF.equals("22222222222") || CPF.equals("33333333333") ||
@@ -38,7 +38,7 @@ public class ValidadeCPF implements ValidacaoCliente {
             sm = 0;
             peso = 10;
             for (i = 0; i < 9; i++) {
-                // converte o i-esimo caractere do CPF em um numero:
+                // converte o i-esimo caractere do cpf em um numero:
                 // por exemplo, transforma o caractere "0" no inteiro 0
                 // (48 eh a posicao de "0" na tabela ASCII)
                 num = (int) (CPF.charAt(i) - 48);
