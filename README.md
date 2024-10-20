@@ -21,6 +21,12 @@ POSTGRES_URL=
 DB_KIND=postgresql
 ```
 
+> **NOTE**
+>
+>Para rodar **localmente** coloque .env na pasta inicial.
+>
+>Para rodar dentro do **container**  coloque .env na pasta *./composer*
+
 Para roda a aplicação localmente:
 
 ```shell script
