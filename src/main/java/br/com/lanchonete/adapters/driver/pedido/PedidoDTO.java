@@ -33,6 +33,7 @@ public class PedidoDTO {
     @ManyToOne()
     private FilaPedidoDTO fila;
 
+    @Enumerated(EnumType.STRING)
     private EstadoPedido estadoPedido;
 
 

@@ -33,7 +33,7 @@ public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
                         VALUES(:estadopedido, :preco, :datacriacao, :fila, :cliente,:id)
                         RETURNING id
                         """)
-                .setParameter("estadopedido", pedido.getEstadoPedido())
+                .setParameter("estadopedido", pedido.getEstadoPedido().name())
                 .setParameter("preco", pedido.getValorTotal())
                 .setParameter("datacriacao", pedido.getDataCriacao())
                 .setParameter("fila", filaId)
