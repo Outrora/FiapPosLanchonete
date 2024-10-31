@@ -19,6 +19,8 @@ public class ProdutoDTO {
     private String nome;
     private String descricao;
     private BigDecimal preco;
+    
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
