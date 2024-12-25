@@ -4,25 +4,44 @@ import org.antlr.v4.runtime.misc.Pair;
 
 import br.com.lanchonete.core.entities.enums.EstadoPedido;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class Pedido {
+    private Optional<UUID> id;
     private LocalDateTime dataCriacao;
     private Optional<Cliente> cliente;
     private List<Pair<Integer, Produto>> produtos;
     private EstadoPedido estadoPedido;
     private BigDecimal valorTotal;
 
-
-    public Pedido(LocalDateTime dataCriacao, Optional<Cliente> cliente, List<Pair<Integer, Produto>> produtos, EstadoPedido estadoPedido, BigDecimal valorTotal) {
+    public Pedido(LocalDateTime dataCriacao, Optional<Cliente> cliente, List<Pair<Integer, Produto>> produtos,
+            EstadoPedido estadoPedido, BigDecimal valorTotal) {
         this.dataCriacao = dataCriacao;
         this.cliente = cliente;
         this.produtos = produtos;
         this.estadoPedido = estadoPedido;
         this.valorTotal = valorTotal;
+        this.id = Optional.empty();
+    }
+
+    public Pedido(LocalDateTime dataCriacao, Optional<UUID> id,
+            EstadoPedido estadoPedido, BigDecimal valorTotal) {
+        this.dataCriacao = dataCriacao;
+        this.cliente = Optional.empty();
+        this.produtos = new ArrayList<>();
+        this.estadoPedido = estadoPedido;
+        this.valorTotal = valorTotal;
+        this.id = id;
+    }
+
+    public Optional<UUID> getId() {
+        return id;
     }
 
     public List<Pair<Integer, Produto>> getProdutos() {
@@ -36,7 +55,6 @@ public class Pedido {
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
-
 
     public EstadoPedido getEstadoPedido() {
         return estadoPedido;
@@ -59,9 +77,8 @@ public class Pedido {
                 LocalDateTime.now(),
                 cliente,
                 produtos,
-                EstadoPedido.recebido,
-                BigDecimal.ZERO
-        );
+                EstadoPedido.PEDIDO_CADASTRADO,
+                BigDecimal.ZERO);
     }
 
     @Override
@@ -75,7 +92,3 @@ public class Pedido {
                 '}';
     }
 }
-  
-
-  
-

@@ -1,5 +1,7 @@
 package br.com.lanchonete.drivers;
 
+import org.jboss.resteasy.reactive.ResponseStatus;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -17,8 +19,8 @@ public class ErrorMapper implements ExceptionMapper<Exception> {
     ObjectMapper objectMapper;
 
     @Override
+    @ResponseStatus(500)
     public Response toResponse(Exception exception) {
-
 
         int code = 500;
         if (exception instanceof ResultadoVazioErro) {

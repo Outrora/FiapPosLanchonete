@@ -4,6 +4,8 @@ import br.com.lanchonete.core.adapters.Pedido.PedidoBanco;
 import br.com.lanchonete.core.adapters.Pedido.PedidoRequest;
 import br.com.lanchonete.core.entities.Cliente;
 import br.com.lanchonete.core.entities.Pedido;
+import br.com.lanchonete.core.entities.enums.EstadoPedido;
+
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -11,6 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -18,6 +21,12 @@ public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
 
     @PersistenceContext
     EntityManager em;
+
+    @Override
+    public Optional<PedidoDTO> buscarPorId(UUID id) {
+        return find("id", id).firstResultOptional();
+
+    }
 
     @Override
     @Transactional
@@ -28,11 +37,11 @@ public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
                 .orElse(null);
 
         var id = (UUID) em.createNativeQuery("""
-                        INSERT INTO pedido
-                        (estadopedido, preco, datacriacao, fila_id, cliente_id,id)
-                        VALUES(:estadopedido, :preco, :datacriacao, :fila, :cliente,:id)
-                        RETURNING id
-                        """)
+                INSERT INTO pedido
+                (estadopedido, preco, datacriacao, fila_id, cliente_id,id)
+                VALUES(:estadopedido, :preco, :datacriacao, :fila, :cliente,:id)
+                RETURNING id
+                """)
                 .setParameter("estadopedido", pedido.getEstadoPedido().name())
                 .setParameter("preco", pedido.getValorTotal())
                 .setParameter("datacriacao", pedido.getDataCriacao())
@@ -41,11 +50,9 @@ public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
                 .setParameter("id", UUID.randomUUID())
                 .getSingleResult();
 
-
         for (var produto : produtos) {
             inserirPedidoProduto(produto, id);
         }
-
 
         return id;
     }
@@ -53,17 +60,27 @@ public class PedidoRepository implements PanacheRepository<PedidoDTO>, PedidoBan
     @Transactional
     void inserirPedidoProduto(PedidoRequest.produtoQuantidade produto, UUID id) {
         em.createNativeQuery("""
-                        INSERT INTO pedido_produto
-                        (quantidade, produto_id, pedido_id)
-                        VALUES (:quantidade, :produto, :pedido)
-                        """)
+                INSERT INTO pedido_produto
+                (quantidade, produto_id, pedido_id)
+                VALUES (:quantidade, :produto, :pedido)
+                """)
                 .setParameter("quantidade", produto.quandidade())
                 .setParameter("produto", produto.id())
                 .setParameter("pedido", id)
                 .executeUpdate();
 
-
     }
 
+    @Override
+    @Transactional
+    public void alteraEstadoPedido(UUID id, EstadoPedido estado) {
+        em.createNativeQuery("""
+                UPDATE pedido SET estadopedido = :estado WHERE id = :id
+                """)
+                .setParameter("estado", estado.name())
+                .setParameter("id", id)
+                .executeUpdate();
+
+    }
 
 }
