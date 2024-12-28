@@ -40,6 +40,16 @@ public class Pedido {
         this.id = id;
     }
 
+    public Pedido(LocalDateTime dataCriacao, Optional<Cliente> cliente, List<Pair<Integer, Produto>> produtos,
+            EstadoPedido estadoPedido, BigDecimal valorTotal, UUID id) {
+        this.dataCriacao = dataCriacao;
+        this.cliente = cliente;
+        this.produtos = produtos;
+        this.estadoPedido = estadoPedido;
+        this.valorTotal = valorTotal;
+        this.id = Optional.of(id);
+    }
+
     public Optional<UUID> getId() {
         return id;
     }

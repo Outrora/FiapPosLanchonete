@@ -49,7 +49,7 @@ public class FilaRepository implements PanacheRepository<FilaPedidoDTO>, FilaDad
                             .toList();
                     var cliente = Optional.ofNullable(AplicacaoMapper.INSTANCE.toCliente(pedidoDTO.getCliente()));
                     return new Pedido(pedidoDTO.getDataCriacao(), cliente, produtos, pedidoDTO.getEstadoPedido(),
-                            pedidoDTO.getPreco());
+                            pedidoDTO.getPreco(), pedidoDTO.getId());
                 })
                 .toList();
 
