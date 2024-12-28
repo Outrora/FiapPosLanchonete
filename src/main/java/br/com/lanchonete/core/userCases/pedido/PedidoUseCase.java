@@ -5,7 +5,7 @@ import br.com.lanchonete.core.adapters.Pedido.PedidoRequest;
 import br.com.lanchonete.core.entities.Pedido;
 import br.com.lanchonete.core.entities.Produto;
 import br.com.lanchonete.core.userCases.cliente.BuscarClienteUseCase;
-import br.com.lanchonete.core.userCases.cozinha.FilaPedidoUseCase;
+import br.com.lanchonete.core.userCases.cozinha.ListaPedidoUseCase;
 import br.com.lanchonete.core.userCases.exception.ErroValidacao;
 import br.com.lanchonete.core.userCases.pedido.Validadores.ValidarPedido;
 import br.com.lanchonete.core.userCases.produto.BuscarProdutoUseCase;
@@ -33,7 +33,7 @@ public class PedidoUseCase {
     BuscarProdutoUseCase busacarProdutoUseCase;
 
     @Inject
-    FilaPedidoUseCase filaPedidoUseCase;
+    ListaPedidoUseCase filaPedidoUseCase;
 
     @Inject
     IPedidoGateway gateway;

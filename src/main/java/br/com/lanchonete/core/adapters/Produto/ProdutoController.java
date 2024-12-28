@@ -31,19 +31,22 @@ public class ProdutoController extends BaseController {
     BuscarProdutoUseCase busacarProdutoUseCase;
 
     public void salvarProduto(Produto produto) {
+        LOG.info("Salvando produto: " + produto.getNome());
         salvarProdutoUserCase.salvarDados(produto);
     }
 
     public Set<Produto> pegarCategoria(Categoria categoria) {
+        LOG.info("Buscando produtos pela categoria: " + categoria);
         return busacarProdutoUseCase.buscarPelaCategoria(categoria);
     }
 
     public Boolean excluiProduto(Long id) {
+        LOG.info("Excluindo produto: " + id);
         return excluirProdutoUseCase.excluir(id);
     }
 
     public void alterarProduto(Long id, Produto produto) {
-
+        LOG.info("Alterando produto: " + id);
         produto.alteraId(id);
         editarProdutoUseCase.editarDados(produto);
     }
