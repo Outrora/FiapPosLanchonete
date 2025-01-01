@@ -13,18 +13,15 @@ import java.util.UUID;
 @Entity(name = "pedido")
 public class PedidoDTO {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
     private BigDecimal preco;
     private LocalDateTime dataCriacao;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<PedidoProdutoDTO> pedidoProdutos;
-
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = true)
@@ -35,7 +32,6 @@ public class PedidoDTO {
 
     @Enumerated(EnumType.STRING)
     private EstadoPedido estadoPedido;
-
 
     public UUID getId() {
         return id;

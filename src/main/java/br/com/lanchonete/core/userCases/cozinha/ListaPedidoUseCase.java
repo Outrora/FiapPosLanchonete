@@ -15,8 +15,4 @@ public class ListaPedidoUseCase {
         return gateway.criarOuPegarFilaHoje();
     }
 
-    public FilaPedidos pegarFilaComPedidos() {
-        return gateway.pegarFilaComPedidos();
-    }
-
 }

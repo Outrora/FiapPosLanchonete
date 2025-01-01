@@ -21,7 +21,7 @@ public class FilaProdutoController extends BaseController {
 
     public FilaPedidos pegarFilaComPedidos() {
         LOG.info("Pegando fila com pedidos");
-        return filaPedidoService.pegarFilaComPedidos();
+        return filaPedidoService.criarFilaouPegarAtual();
     }
 
     public List<Pedido> pegarFilaComPedidosEmPreparo() {

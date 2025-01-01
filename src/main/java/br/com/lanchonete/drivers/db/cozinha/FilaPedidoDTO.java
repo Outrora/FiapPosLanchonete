@@ -14,8 +14,7 @@ public class FilaPedidoDTO {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "fila")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "fila")
     private List<PedidoDTO> listaPedidos;
 
     private LocalDate dia;
