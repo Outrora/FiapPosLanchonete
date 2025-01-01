@@ -6,6 +6,4 @@ public interface IFilaGateway {
 
     FilaPedidos criarOuPegarFilaHoje();
 
-    FilaPedidos pegarFilaComPedidos();
-
 }

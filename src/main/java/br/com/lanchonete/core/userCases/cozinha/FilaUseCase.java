@@ -15,7 +15,7 @@ public class FilaUseCase {
     ListaPedidoUseCase listaPedidoUseCase;
 
     public List<Pedido> pegarFila() {
-        var pedidos = listaPedidoUseCase.pegarFilaComPedidos();
+        var pedidos = listaPedidoUseCase.criarFilaouPegarAtual();
         var listaPedidos = pedidos.listaPedidos()
                 .stream()
                 .filter((pedido) -> pedido.getEstadoPedido().getOrdem() != 0)
