@@ -7,6 +7,7 @@ import br.com.lanchonete.core.entities.Produto;
 import br.com.lanchonete.core.userCases.cliente.BuscarClienteUseCase;
 import br.com.lanchonete.core.userCases.cozinha.ListaPedidoUseCase;
 import br.com.lanchonete.core.userCases.exception.ErroValidacao;
+import br.com.lanchonete.core.userCases.pagamento.CriarPedidoPagamentoUseCase;
 import br.com.lanchonete.core.userCases.pedido.Validadores.ValidarPedido;
 import br.com.lanchonete.core.userCases.produto.BuscarProdutoUseCase;
 import io.quarkus.arc.All;
@@ -34,6 +35,9 @@ public class PedidoUseCase {
 
     @Inject
     ListaPedidoUseCase filaPedidoUseCase;
+
+    @Inject
+    CriarPedidoPagamentoUseCase criarPedidoPagamentoUseCase;
 
     @Inject
     IPedidoGateway gateway;
@@ -71,7 +75,11 @@ public class PedidoUseCase {
 
         var filaAtual = filaPedidoUseCase.criarFilaouPegarAtual();
 
-        return gateway.salvar(pedidos, filaAtual, request.getProdutos());
+        var id = gateway.salvar(pedidos, filaAtual, request.getProdutos());
+
+        criarPedidoPagamentoUseCase.criarPagamento(id);
+
+        return id;
 
     }
 

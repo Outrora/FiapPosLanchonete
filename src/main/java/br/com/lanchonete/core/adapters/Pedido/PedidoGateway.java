@@ -9,6 +9,7 @@ import br.com.lanchonete.core.entities.FilaPedidos;
 import br.com.lanchonete.core.entities.Pedido;
 import br.com.lanchonete.core.entities.Produto;
 import br.com.lanchonete.core.entities.enums.EstadoPedido;
+import br.com.lanchonete.core.userCases.exception.ResultadoVazioErro;
 import br.com.lanchonete.drivers.AplicacaoMapper;
 import br.com.lanchonete.drivers.db.pedido.PedidoDTO;
 
@@ -34,9 +35,12 @@ public class PedidoGateway extends BaseGateway implements IPedidoGateway {
 
     @Override
     public Pedido buscarPorId(UUID id) {
-        return peristencia.buscarPorId(id)
-                .map(this::toPedido)
-                .orElseThrow();
+        System.out.println("Buscando pedido por id: " + id);
+        var pedido = peristencia.buscarPorId(id)
+                .orElseThrow(() -> new ResultadoVazioErro("Pedido não encontrado"));
+        var pedidos = this.toPedido(pedido);
+        System.out.println("Pedido encontrado: " + pedidos);
+        return pedidos;
     }
 
     @Override
@@ -54,10 +58,11 @@ public class PedidoGateway extends BaseGateway implements IPedidoGateway {
                         AplicacaoMapper.INSTANCE.toProduto(produto.getProduto())))
                 .toList();
 
-        var cliente = Optional.of(AplicacaoMapper.INSTANCE.toCliente(pedidoDTO.getCliente()));
+        var cliente = Optional.ofNullable(pedidoDTO.getCliente())
+                .map(AplicacaoMapper.INSTANCE::toCliente);
 
         return new Pedido(pedidoDTO.getDataCriacao(), cliente, produtos,
-                pedidoDTO.getEstadoPedido(), pedidoDTO.getPreco());
+                pedidoDTO.getEstadoPedido(), pedidoDTO.getPreco(), pedidoDTO.getId());
 
     }
 

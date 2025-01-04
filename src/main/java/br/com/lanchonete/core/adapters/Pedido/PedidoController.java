@@ -27,4 +27,5 @@ public class PedidoController extends BaseController {
         LOG.info("Verificando status do pedido");
         return statusPedidoUseCase.buscarStatusPedido(id);
     }
+
 }
