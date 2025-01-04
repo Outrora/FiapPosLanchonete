@@ -1,6 +1,5 @@
 package br.com.lanchonete.drivers.web.pagamento;
 
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.lanchonete.core.adapters.Pagamento.PagamentoController;

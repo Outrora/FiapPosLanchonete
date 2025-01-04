@@ -4,7 +4,6 @@ import org.antlr.v4.runtime.misc.Pair;
 
 import br.com.lanchonete.core.entities.enums.EstadoPedido;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
