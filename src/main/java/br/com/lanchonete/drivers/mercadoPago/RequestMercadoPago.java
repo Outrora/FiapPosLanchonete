@@ -7,6 +7,7 @@ public record RequestMercadoPago(
                 String external_reference,
                 String description,
                 double total_amount,
+                String notification_url,
                 List<Item> items) {
         public static record Item(
                         String title,

@@ -37,6 +37,23 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: POSTGRES_PASSWORD
+            - name: MERCADO_PAGO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_TOKEN
+            - name: MERCADO_PAGO_POS_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_POS_ID
+            - name: MERCADO_PAGO_USER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_USER_ID
+            - name: MERCADO_PAGO_MP_REST_URL
+              value: https://api.mercadopago.com
           resources:
             requests:
               memory: "256Mi"
