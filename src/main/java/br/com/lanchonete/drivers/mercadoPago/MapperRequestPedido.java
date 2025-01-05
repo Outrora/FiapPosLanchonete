@@ -13,6 +13,7 @@ public class MapperRequestPedido {
                 pedido.getId().map(UUID::toString).orElseGet(() -> "0"),
                 pedido.getDataCriacao().toString(),
                 pedido.getValorTotal().doubleValue(),
+                "https://osprey-champion-multiply.ngrok-free.app/mercado",
                 pedido.getProdutos().stream().map((pedidoItem) -> {
 
                     var total = pedidoItem.b.getPreco().multiply(BigDecimal.valueOf(pedidoItem.a)).doubleValue();
