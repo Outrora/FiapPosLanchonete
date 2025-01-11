@@ -26,11 +26,11 @@ public class PagamentoMercadoPagoGateway implements IPagamentoGateways {
     GerarQRCode gerarQRCode;
 
     @Override
-    public void criarPagamento(Pedido pedido) {
+    public String criarPagamento(Pedido pedido) {
         String bearerToken = "Bearer " + token;
         System.out.println("Criando pagamento para o pedido: " + bearerToken);
         var resutado = gerarQRCode.criarPagamento(idUser, idPOS, bearerToken, MapperRequestPedido.map(pedido));
-        System.out.println("Pagamento criado: " + resutado);
+        return resutado.qr_data();
     }
 
 }

@@ -2,6 +2,7 @@ package br.com.lanchonete.core.userCases.pedido;
 
 import br.com.lanchonete.core.adapters.Pedido.IPedidoGateway;
 import br.com.lanchonete.core.adapters.Pedido.PedidoRequest;
+import br.com.lanchonete.core.entities.Pagamento;
 import br.com.lanchonete.core.entities.Pedido;
 import br.com.lanchonete.core.entities.Produto;
 import br.com.lanchonete.core.userCases.cliente.BuscarClienteUseCase;
@@ -17,7 +18,6 @@ import org.antlr.v4.runtime.misc.Pair;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -42,7 +42,7 @@ public class PedidoUseCase {
     @Inject
     IPedidoGateway gateway;
 
-    public UUID cadastrarPedido(PedidoRequest request) {
+    public Pagamento cadastrarPedido(PedidoRequest request) {
         System.out.println(validadores);
 
         for (var validador : validadores) {
@@ -77,9 +77,7 @@ public class PedidoUseCase {
 
         var id = gateway.salvar(pedidos, filaAtual, request.getProdutos());
 
-        criarPedidoPagamentoUseCase.criarPagamento(id);
-
-        return id;
+        return criarPedidoPagamentoUseCase.criarPagamento(id);
 
     }
 

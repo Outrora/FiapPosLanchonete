@@ -17,6 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.lanchonete.core.adapters.Pedido.PedidoController;
 import br.com.lanchonete.core.adapters.Pedido.PedidoRequest;
+import br.com.lanchonete.core.entities.Pagamento;
 
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public class RestPedido {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public UUID criarPedido(PedidoRequest pedido) {
+    public Pagamento criarPedido(PedidoRequest pedido) {
         return controller.cadatrarPedido(pedido);
     }
 
