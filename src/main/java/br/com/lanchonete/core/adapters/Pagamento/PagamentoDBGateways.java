@@ -4,9 +4,10 @@ import br.com.lanchonete.core.adapters.Pedido.IPedidoGateway;
 import br.com.lanchonete.core.entities.Pedido;
 import br.com.lanchonete.core.entities.enums.EstadoPedido;
 import br.com.lanchonete.core.userCases.exception.ResultadoVazioErro;
-
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+@ApplicationScoped
 public class PagamentoDBGateways implements IPagamentoGateways {
 
     @Inject
