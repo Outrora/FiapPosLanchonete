@@ -24,10 +24,12 @@ DB_KIND=postgresql
 ```
 
 > **NOTE**
->
+
 >Para rodar **localmente** coloque .env na pasta inicial.
 >
 >Para rodar dentro do **container**  coloque .env na pasta *./composer*
+> 
+> ao rodar o script ele falara qual .env ta faltando
 
 Para roda a aplicação localmente:
 

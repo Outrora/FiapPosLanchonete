@@ -4,6 +4,6 @@ import br.com.lanchonete.core.entities.Pedido;
 
 public interface IPagamentoGateways {
 
-    void criarPagamento(Pedido pedido);
+    String criarPagamento(Pedido pedido);
 
 }
