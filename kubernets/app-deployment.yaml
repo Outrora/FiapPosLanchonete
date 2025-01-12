@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: mrpauloii/lanchonete_fiap:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_KIND
+              value: "postgresql"
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_URL
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_PASSWORD
+            - name: MERCADO_PAGO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_TOKEN
+            - name: MERCADO_PAGO_POS_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_POS_ID
+            - name: MERCADO_PAGO_USER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mercado-pago-secret
+                  key: MERCADO_PAGO_USER_ID
+            - name: MERCADO_PAGO_MP_REST_URL
+              value: https://api.mercadopago.com
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

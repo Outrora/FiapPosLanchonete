@@ -1,0 +1,352 @@
+---
+openapi: 3.0.3
+info:
+  title: lanchonete-fiap API
+  version: 0.0.1-SNAPSHOT
+tags:
+- name: Cliente
+  description: Endpoints do clientes
+- name: Produto
+  description: Endpoints do produto
+- name: cozinha
+  description: Endpoints do cozinha
+- name: ercado Pago
+  description: Api de WebHooks do mercado pago
+- name: pagamento
+  description: Endpoints para pagemento
+- name: pedido
+  description: Endpoints do pedido
+paths:
+  /cliente:
+    post:
+      tags:
+      - Cliente
+      requestBody:
+        content:
+          application/json;charsert=utf-8:
+            schema:
+              $ref: "#/components/schemas/ClienteRequest"
+      responses:
+        "200":
+          description: OK
+  /cliente/{cpf}:
+    get:
+      tags:
+      - Cliente
+      parameters:
+      - name: cpf
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charsert=utf-8:
+              schema:
+                $ref: "#/components/schemas/Cliente"
+  /cozinha/FilaPedidos:
+    get:
+      tags:
+      - cozinha
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charsert=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pedido"
+  /cozinha/ListaPedidos:
+    get:
+      tags:
+      - cozinha
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charsert=utf-8:
+              schema:
+                $ref: "#/components/schemas/FilaPedidos"
+  /mercado:
+    post:
+      tags:
+      - ercado Pago
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        "201":
+          description: Created
+  /pedido:
+    post:
+      tags:
+      - pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PedidoRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pagamento"
+  /pedido/statusPagamento/{id}:
+    get:
+      tags:
+      - pedido
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: Retorna o status de pagamento do Pedido
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Pagamento Aprovado
+        "404":
+          description: Retorna quando não encontrou pedido
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Pedido não encontrado
+  /pedido/webhookPagamento:
+    post:
+      tags:
+      - pagamento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PagamentoWebHookResquest"
+      responses:
+        "201":
+          description: Created
+  /produto:
+    post:
+      tags:
+      - Produto
+      requestBody:
+        content:
+          application/json;charsert=utf-8:
+            schema:
+              $ref: "#/components/schemas/ProdutoAdapter"
+      responses:
+        "200":
+          description: OK
+  /produto/categoria/{categoria}:
+    get:
+      tags:
+      - Produto
+      parameters:
+      - name: categoria
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/Categoria"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charsert=utf-8:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: "#/components/schemas/Produto"
+  /produto/{id}:
+    put:
+      tags:
+      - Produto
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json;charsert=utf-8:
+            schema:
+              $ref: "#/components/schemas/ProdutoAdapter"
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+      - Produto
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    Categoria:
+      enum:
+      - lanche
+      - acompanhamento
+      - bebida
+      - sobremesa
+      type: string
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        cpf:
+          type: string
+        id:
+          format: int64
+          type: integer
+          nullable: true
+    ClienteRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+        CPF:
+          type: string
+        email:
+          type: string
+    EstadoPedido:
+      enum:
+      - PEDIDO_CADASTRADO
+      - PAGAMENTO_APROVADO
+      - PAGAMENTO_RECUSADO
+      - EM_PREPARACAO
+      - PRONTO
+      - FINALIZADO
+      type: string
+    FilaPedidos:
+      type: object
+      properties:
+        listaPedidos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Pedido"
+        dia:
+          $ref: "#/components/schemas/LocalDate"
+        id:
+          format: int64
+          type: integer
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: 2022-03-10T12:15:50
+    Pagamento:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/UUID"
+        formaPagamento:
+          type: string
+    PagamentoWebHookResquest:
+      type: object
+      properties:
+        pedidoId:
+          $ref: "#/components/schemas/UUID"
+        statusPagamento:
+          type: string
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: string
+          allOf:
+          - $ref: "#/components/schemas/UUID"
+          nullable: true
+        dataCriacao:
+          $ref: "#/components/schemas/LocalDateTime"
+        cliente:
+          type: object
+          allOf:
+          - $ref: "#/components/schemas/Cliente"
+          nullable: true
+        produtos:
+          type: array
+          items:
+            type: object
+            properties:
+              a:
+                format: int32
+                type: integer
+              b:
+                $ref: "#/components/schemas/Produto"
+        estadoPedido:
+          $ref: "#/components/schemas/EstadoPedido"
+        valorTotal:
+          type: number
+    PedidoRequest:
+      type: object
+      properties:
+        id_cliente:
+          format: int64
+          type: integer
+        produtos:
+          type: array
+          items:
+            $ref: "#/components/schemas/produtoQuantidade"
+    Produto:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        preco:
+          type: number
+        categoria:
+          $ref: "#/components/schemas/Categoria"
+        id:
+          format: int64
+          type: integer
+          nullable: true
+    ProdutoAdapter:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        preco:
+          type: number
+        categoria:
+          $ref: "#/components/schemas/Categoria"
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
+    produtoQuantidade:
+      type: object
+      properties:
+        quandidade:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer

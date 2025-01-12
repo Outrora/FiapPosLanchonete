@@ -24,10 +24,12 @@ DB_KIND=postgresql
 ```
 
 > **NOTE**
->
+
 >Para rodar **localmente** coloque .env na pasta inicial.
 >
 >Para rodar dentro do **container**  coloque .env na pasta *./composer*
+> 
+> ao rodar o script ele falara qual .env ta faltando
 
 Para roda a aplicação localmente:
 
@@ -46,9 +48,21 @@ chmod +x ./run.sh
 > **_NOTE:_**  O Quarkus agora vem com uma Dev UI, que está disponível no modo dev apenas
 > em <http://localhost:8080/q/dev/>.
 
+
+## :wrench: Infraestrutura
+
+Acesso ao Miro: <https://miro.com/app/board/uXjVLvULzeo=/?share_link_id=352623534822>
+
+Link do Video : <https://www.youtube.com/watch?v=uYyea_OY2kQ&ab_channel=Pauloferreiradeoliveira>
+
+## :flags: Dominio 
+
+Acesso ao Miro <https://miro.com/app/board/uXjVLcUH-oM=/?share_link_id=458579459325>
+
 ## :interrobang: Swagger
 
-Para acessar a documentação do REST acessar <http://localhost:8080/swagger-ui/>
+Para acessar a documentação do REST acessar <http://localhost:8080/swagger-ui/> ou
+[json](./doc/swagger.json)
 
 
 

@@ -3,3 +3,8 @@ POSTGRES_USER=
 POSTGRES_PASSWORD=
 POSTGRES_URL=jdbc:postgresql://localhost:5432/lanchonete
 DB_KIND=postgresql
+
+MERCADO_PAGO_TOKEN=
+MERCADO_PAGO_POS_ID=
+MERCADO_PAGO_USER_ID=
+MERCADO_PAGO_MP_REST_URL=https://api.mercadopago.com
