@@ -9,7 +9,7 @@ import br.com.lanchonete.drivers.mercadoPago.MapperRequestPedido;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-//@ApplicationScoped
+@ApplicationScoped
 public class PagamentoMercadoPagoGateway implements IPagamentoGateways {
 
     @ConfigProperty(name = "mercado_pago.user.id")

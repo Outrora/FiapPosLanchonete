@@ -10,6 +10,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_URL=${POSTGRES_URL}
+      - MERCADO_PAGO_TOKEN=${MERCADO_PAGO_TOKEN}
+      - MERCADO_PAGO_POS_ID=${MERCADO_PAGO_POS_ID}
+      - MERCADO_PAGO_USER_ID=${MERCADO_PAGO_USER_ID}
+      - MERCADO_PAGO_MP_REST_URL=https://api.mercadopago.com
     depends_on:
       db:
         condition: service_healthy
