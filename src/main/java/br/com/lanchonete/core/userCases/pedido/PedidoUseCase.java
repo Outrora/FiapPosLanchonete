@@ -42,14 +42,14 @@ public class PedidoUseCase {
     @Inject
     IPedidoGateway gateway;
 
-    public Pagamento cadastrarPedido(PedidoRequest request) {
+    public Pagamento cadastrarPedido(PedidoRequest request, Long idCliente) {
         System.out.println(validadores);
 
         for (var validador : validadores) {
             validador.validar(request);
         }
 
-        var cliente = buscarClienteUseCase.pegarID(request.getId_cliente());
+        var cliente = buscarClienteUseCase.pegarID(idCliente);
 
         var idsProdutos = request.getProdutos()
                 .stream()
