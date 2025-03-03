@@ -13,6 +13,7 @@ services:
       - MERCADO_PAGO_TOKEN=${MERCADO_PAGO_TOKEN}
       - MERCADO_PAGO_POS_ID=${MERCADO_PAGO_POS_ID}
       - MERCADO_PAGO_USER_ID=${MERCADO_PAGO_USER_ID}
+      - SECRET_KEY=${SECRET_KEY}
       - MERCADO_PAGO_MP_REST_URL=https://api.mercadopago.com
     depends_on:
       db:

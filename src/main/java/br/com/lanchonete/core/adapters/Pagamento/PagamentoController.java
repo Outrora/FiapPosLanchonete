@@ -2,7 +2,6 @@ package br.com.lanchonete.core.adapters.Pagamento;
 
 import br.com.lanchonete.core.adapters.Pedido.IPedidoGateway;
 import br.com.lanchonete.core.adapters.base.BaseController;
-import br.com.lanchonete.core.entities.Pedido;
 import br.com.lanchonete.core.userCases.pagamento.AlterarEstadoPagamentoPedidoUseCase;
 import br.com.lanchonete.core.userCases.pagamento.CriarPedidoPagamentoUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
