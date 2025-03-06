@@ -51,6 +51,13 @@ chmod +x ./run.sh
 
 ## :wrench: Infraestrutura
 
+Links pra repositorios da infra do projeto (***Rodar o Projeto em Ordem***):
+
+1. Infra Banco: https://github.com/Outrora/pos-lanchonete-banco
+2. Infra do EKS: https://github.com/Outrora/pos-lanchonete-eks
+3. Infra Lambda: https://github.com/Outrora/pos-lambda
+
+
 Acesso ao Miro: <https://miro.com/app/board/uXjVLvULzeo=/?share_link_id=352623534822>
 
 Link do Video : <https://www.youtube.com/watch?v=uYyea_OY2kQ&ab_channel=Pauloferreiradeoliveira>

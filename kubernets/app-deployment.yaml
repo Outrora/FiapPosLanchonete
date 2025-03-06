@@ -20,6 +20,11 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: key-secret
+                  key: SECRET_KEY
             - name: DB_KIND
               value: "postgresql"
             - name: POSTGRES_URL
