@@ -7,7 +7,7 @@ import br.com.lanchonete.core.userCases.exception.ResultadoVazioErro;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-//@ApplicationScoped
+@ApplicationScoped
 public class PagamentoDBGateways implements IPagamentoGateways {
 
     @Inject
